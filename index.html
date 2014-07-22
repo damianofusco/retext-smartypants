@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>retext-smartypants</title>
+    <style>
+        label {
+            display: block;
+        }
+        fieldset {
+            border-width: 0;
+        }
+    </style>
+  </head>
+  <body class="smartypants">
+    <h1>retext-smartypants</h1>
+    <p>A quick demo of <a href="https://github.com/wooorm/retext-smartypants">retext-smartypants</a>.</p>
+    <p>Just paste (or write) some text in the text area below, choose the options you want to use, an the “smarter” version will magically appear below it.</p>
+    <p>Please raise any issues on <a href="https://github.com/wooorm/retext-smartypants/issues">Github</a>.</p>
+    <hr />
+    <fieldset>
+        <label for="quotes">Quotes? <input name="quotes" type="checkbox" checked /></label>
+        <label for="ellipses">Ellipses? <input name="ellipses" type="checkbox" checked /></label>
+        <label for="backticks">
+            Backticks?
+            <select name="backticks">
+                <option value="all">All</option>
+                <option value="true" selected>Yes</option>
+                <option value="false">No</option>
+            </select>
+        </label>
+        <label for="dashes">
+            Dashes?
+            <select name="dashes">
+                <option value="oldschool">Old school</option>
+                <option value="inverted">Inverted</option>
+                <option value="true" selected>Yes</option>
+                <option value="false">No</option>
+            </select>
+        </label>
+    </fieldset>
+    <textarea spellcheck="false" class="smartypants__input" rows="20" cols="80" autofocus>Enter some text here--A 'simple' english sentence. . . or something more sophisticated.</textarea>
+    <textarea class="smartypants__output" rows="20" cols="80" readonly></textarea>
+    <script src="build/build.js"></script>
+  </body>
+</html>
