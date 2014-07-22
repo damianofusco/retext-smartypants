@@ -43,6 +43,20 @@ ellipsesElement.addEventListener('change', oncheckboxchange);
 dashesElement.addEventListener('change', onselectchange);
 backticksElement.addEventListener('change', onselectchange);
 
+backticksElement.addEventListener('change', function () {
+    if (options.backticks === 'all' && options.quotes) {
+        quotesElement.checked = false;
+        options.quotes = false
+    }
+})
+
+quotesElement.addEventListener('change', function () {
+    if (options.backticks === 'all' && options.quotes) {
+        backticksElement.selectedIndex = 1;
+        options.backticks = true;
+    }
+})
+
 function onanychange() {
     retext = new Retext().use(smartypants(options));
     makeSmarter(inputElement.value);
