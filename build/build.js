@@ -418,7 +418,7 @@ exports = module.exports = smartypants;
 
 });
 
-require.register("wooorm~parse-latin@0.1.0-rc.11", function (exports, module) {
+require.register("wooorm~parse-latin@0.1.1", function (exports, module) {
 /**!
  * parse-latin
  *
@@ -444,7 +444,7 @@ var EXPRESSION_ABBREVIATION_PREFIX, EXPRESSION_NEW_LINE,
  *
  * @param {string} value
  * @return {string}
- * @api private
+ * @private
  */
 function expand(value) {
     return value.replace(/\w{4}/g, '\\u$&');
@@ -456,7 +456,7 @@ function expand(value) {
  * "Borrowed" from XRegexp.
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 GROUP_NUMERICAL = expand(
@@ -493,7 +493,7 @@ GROUP_NUMERICAL = expand(
  * "Borrowed" from XRegexp.
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 GROUP_LETTER_LOWER = expand('0061-007A00B500DF-00F600F8-00FF010101030105' +
@@ -544,7 +544,7 @@ GROUP_LETTER_LOWER = expand('0061-007A00B500DF-00F600F8-00FF010101030105' +
  * "Borrowed" from XRegexp.
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 GROUP_ALPHABETIC = expand('0041-005A0061-007A00AA00B500BA00C0-00D6' +
@@ -609,7 +609,7 @@ GROUP_ALPHABETIC = expand('0041-005A0061-007A00AA00B500BA00C0-00D6' +
  * "Borrowed" from XRegexp.
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 GROUP_WHITE_SPACE = expand(
@@ -621,7 +621,7 @@ GROUP_WHITE_SPACE = expand(
  * Marks for Symbols, Blocks.
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 GROUP_COMBINING_DIACRITICAL_MARK = expand('20D0-20FF0300-036F');
@@ -630,7 +630,7 @@ GROUP_COMBINING_DIACRITICAL_MARK = expand('20D0-20FF0300-036F');
  * Expose Unicode Mark, Nonspacing Block.
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 GROUP_COMBINING_NONSPACING_MARK = expand('0300-036F0483-04870591-05BD' +
@@ -666,7 +666,7 @@ GROUP_COMBINING_NONSPACING_MARK = expand('0300-036F0483-04870591-05BD' +
  * - Combining Diacritical Marks for Symbols block;
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 GROUP_WORD = GROUP_NUMERICAL + GROUP_ALPHABETIC +
@@ -676,7 +676,7 @@ GROUP_WORD = GROUP_NUMERICAL + GROUP_ALPHABETIC +
  * Expose Unicode Cs (Other, Surrogate) category.
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 GROUP_ASTRAL = expand('D800-DBFFDC00-DFFF');
@@ -685,7 +685,7 @@ GROUP_ASTRAL = expand('D800-DBFFDC00-DFFF');
  * Expose interrobang, question-, and exclamation mark.
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 GROUP_TERMINAL_MARKER = '\\.\\u203D?!';
@@ -696,7 +696,7 @@ GROUP_TERMINAL_MARKER = '\\.\\u203D?!';
  * "Borrowed" from XRegexp.
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 GROUP_CLOSING_PUNCTUATION = expand('0029005D007D0F3B0F3D169C2046' +
@@ -712,7 +712,7 @@ GROUP_CLOSING_PUNCTUATION = expand('0029005D007D0F3B0F3D169C2046' +
  * "Borrowed" from XRegexp.
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 GROUP_FINAL_PUNCTUATION = expand('00BB2019201D203A2E032E052E0A2E0D2E1D2E21');
@@ -726,7 +726,7 @@ GROUP_FINAL_PUNCTUATION = expand('00BB2019201D203A2E032E052E0A2E0D2E1D2E21');
  * - followed by full stop.
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 EXPRESSION_ABBREVIATION_PREFIX = new RegExp(
@@ -755,7 +755,7 @@ EXPRESSION_ABBREVIATION_PREFIX = new RegExp(
  * the sentence's terminal marker.
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 EXPRESSION_AFFIX_PUNCTUATION = new RegExp(
@@ -770,7 +770,7 @@ EXPRESSION_AFFIX_PUNCTUATION = new RegExp(
  * Matches a string consisting of one or more new line characters.
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 EXPRESSION_NEW_LINE = /^(\r?\n|\r)+$/;
@@ -791,7 +791,7 @@ EXPRESSION_NEW_LINE = /^(\r?\n|\r)+$/;
  * - Middle dot
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 EXPRESSION_INNER_WORD_PUNCTUATION =
@@ -801,7 +801,7 @@ EXPRESSION_INNER_WORD_PUNCTUATION =
  * Matches an initial lower case letter.
  *
  * @global
- * @api private
+ * @private
  * @constant
  */
 EXPRESSION_LOWER_INITIAL_EXCEPTION = new RegExp(
@@ -813,10 +813,10 @@ EXPRESSION_LOWER_INITIAL_EXCEPTION = new RegExp(
 /**
  * Apply modifiers on a token.
  *
- * @param {Function[]} modifiers
+ * @param {Array.<Function>} modifiers
  * @param {Object} parent
  * @global
- * @api private
+ * @private
  */
 function modify(modifiers, parent) {
     var length = modifiers.length,
@@ -855,7 +855,7 @@ function modify(modifiers, parent) {
  * @param {Object} token
  * @return {string} - The stringified token.
  * @global
- * @api private
+ * @private
  */
 function tokenToString(token) {
     var value = '',
@@ -889,12 +889,12 @@ function tokenToString(token) {
  * @param {string} options.type          - The type of parent node to create.
  * @param {string} options.tokenizer     - The property where the child
  *                                         tokenizer lives
- * @param {Function[]} options.modifiers - The initial modifiers to apply on
- *                                         each parse.
+ * @param {Array.<Function>} options.modifiers - The initial modifiers to
+ *                                         apply on each parse.
  * @param {RegExp} options.delimiter     - The delimiter to break children at.
  * @return {Function} - The tokenizer.
  * @global
- * @api private
+ * @private
  */
 function tokenizerFactory(context, options) {
     var name = options.name;
@@ -949,10 +949,11 @@ function tokenizerFactory(context, options) {
  * @param {Object} child
  * @param {number} index
  * @param {Object} parent
- * @return {number?} - Either void, or the next index to iterate over.
+ * @return {undefined|number} - Either void, or the next index to iterate
+ *     over.
  *
  * @global
- * @api private
+ * @private
  */
 function mergeInnerWordPunctuation(child, index, parent) {
     var children, prev, next;
@@ -1011,10 +1012,11 @@ function mergeInnerWordPunctuation(child, index, parent) {
  * @param {Object} child
  * @param {number} index
  * @param {Object} parent
- * @return {number?} - Either void, or the next index to iterate over.
+ * @return {undefined|number} - Either void, or the next index to iterate
+ *     over.
  *
  * @global
- * @api private
+ * @private
  */
 function mergeInitialisms(child, index, parent) {
     var prev, children, length, iterator;
@@ -1081,10 +1083,11 @@ function mergeInitialisms(child, index, parent) {
  * @param {Object} child
  * @param {number} index
  * @param {Object} parent
- * @return {number?} - Either void, or the next index to iterate over.
+ * @return {undefined|number} - Either void, or the next index to iterate
+ *     over.
  *
  * @global
- * @api private
+ * @private
  */
 function mergePrefixExceptions(child, index, parent) {
     var children = child.children,
@@ -1134,10 +1137,11 @@ function mergePrefixExceptions(child, index, parent) {
  * @param {Object} child
  * @param {number} index
  * @param {Object} parent
- * @return {number?} - Either void, or the next index to iterate over.
+ * @return {undefined|number} - Either void, or the next index to iterate
+ *     over.
  *
  * @global
- * @api private
+ * @private
  */
 function mergeAffixExceptions(child, index, parent) {
     var children = child.children,
@@ -1187,10 +1191,11 @@ function mergeAffixExceptions(child, index, parent) {
  * @param {Object} child
  * @param {number} index
  * @param {Object} parent
- * @return {number?} - Either void, or the next index to iterate over.
+ * @return {undefined|number} - Either void, or the next index to iterate
+ *     over.
  *
  * @global
- * @api private
+ * @private
  */
 function makeInitialWhiteSpaceAndSourceSiblings(child, index, parent) {
     var children = child.children;
@@ -1216,10 +1221,11 @@ function makeInitialWhiteSpaceAndSourceSiblings(child, index, parent) {
  * @param {Object} child
  * @param {number} index
  * @param {Object} parent
- * @return {number?} - Either void, or the next index to iterate over.
+ * @return {undefined|number} - Either void, or the next index to iterate
+ *     over.
  *
  * @global
- * @api private
+ * @private
  */
 function makeFinalWhiteSpaceAndSourceSiblings(child, index, parent) {
     var children = child.children;
@@ -1245,10 +1251,11 @@ function makeFinalWhiteSpaceAndSourceSiblings(child, index, parent) {
  * @param {Object} child
  * @param {number} index
  * @param {Object} parent
- * @return {number?} - Either void, or the next index to iterate over.
+ * @return {undefined|number} - Either void, or the next index to iterate
+ *     over.
  *
  * @global
- * @api private
+ * @private
  */
 function mergeInitialLowerCaseLetterSentences(child, index, parent) {
     var node, children, iterator, previousChild;
@@ -1295,10 +1302,11 @@ function mergeInitialLowerCaseLetterSentences(child, index, parent) {
  * @param {Object} child
  * @param {number} index
  * @param {Object} parent
- * @return {number?} - Either void, or the next index to iterate over.
+ * @return {undefined|number} - Either void, or the next index to iterate
+ *     over.
  *
  * @global
- * @api private
+ * @private
  */
 function mergeNonWordSentences(child, index, parent) {
     var children, iterator, otherChild;
@@ -1342,10 +1350,11 @@ function mergeNonWordSentences(child, index, parent) {
  * @param {Object} child
  * @param {number} index
  * @param {Object} parent
- * @return {number?} - Either void, or the next index to iterate over.
+ * @return {undefined|number} - Either void, or the next index to iterate
+ *     over.
  *
  * @global
- * @api private
+ * @private
  */
 function mergeSourceLines(child, index, parent) {
     var iterator, siblings, sibling, value;
@@ -1376,7 +1385,7 @@ function mergeSourceLines(child, index, parent) {
             break;
         }
 
-        value = sibling.children[0].value + value;
+        value = tokenToString(sibling) + value;
     }
 
     if (!value) {
@@ -1398,10 +1407,11 @@ function mergeSourceLines(child, index, parent) {
  * @param {Object} child
  * @param {number} index
  * @param {Object} parent
- * @return {number?} - Either void, or the next index to iterate over.
+ * @return {undefined|number} - Either void, or the next index to iterate
+ *     over.
  *
  * @global
- * @api private
+ * @private
  */
 function mergeAffixPunctuation(child, index, parent) {
     var children = child.children;
@@ -1428,10 +1438,11 @@ function mergeAffixPunctuation(child, index, parent) {
  * @param {Object} child
  * @param {number} index
  * @param {Object} parent
- * @return {number?} - Either void, or the next index to iterate over.
+ * @return {undefined|number} - Either void, or the next index to iterate
+ *     over.
  *
  * @global
- * @api private
+ * @private
  */
 function removeEmptyNodes(child, index, parent) {
     if ('children' in child && !child.children.length) {
@@ -1445,7 +1456,7 @@ function removeEmptyNodes(child, index, parent) {
  * language into a syntax tree.
  *
  * @constructor
- * @api public
+ * @public
  */
 function ParseLatin() {
     /*
@@ -1466,7 +1477,7 @@ parseLatinPrototype = ParseLatin.prototype;
  * - One or more astral plane characters;
  * - One or more of the same character;
  *
- * @api private
+ * @private
  * @memberof ParseLatin#
  */
 parseLatinPrototype.EXPRESSION_TOKEN = new RegExp(
@@ -1480,7 +1491,7 @@ parseLatinPrototype.EXPRESSION_TOKEN = new RegExp(
 /**
  * Matches a word.
  *
- * @api private
+ * @private
  * @memberof ParseLatin#
  */
 parseLatinPrototype.EXPRESSION_WORD = new RegExp(
@@ -1490,7 +1501,7 @@ parseLatinPrototype.EXPRESSION_WORD = new RegExp(
 /**
  * Matches a string containing ONLY white space.
  *
- * @api private
+ * @private
  * @memberof ParseLatin#
  */
 parseLatinPrototype.EXPRESSION_WHITE_SPACE = new RegExp(
@@ -1502,9 +1513,9 @@ parseLatinPrototype.EXPRESSION_WHITE_SPACE = new RegExp(
  * white space, and everything else (punctuation).
  *
  * @param {string?} value
- * @return {Object[]} - An array of tokens.
+ * @return {Array.<Object>} - An array of tokens.
  *
- * @api public
+ * @public
  * @memberof ParseLatin#
  */
 parseLatinPrototype.tokenize = function (value) {
@@ -1563,7 +1574,7 @@ parseLatinPrototype.tokenize = function (value) {
  * @param {string?} value
  * @return {Object} - A classified token.
  *
- * @api private
+ * @private
  * @memberof ParseLatin#
  */
 parseLatinPrototype.classifier = function (value) {
@@ -1604,9 +1615,9 @@ parseLatinPrototype.classifier = function (value) {
  * Tokenize natural Latin-script language into a sentence token.
  *
  * @param {string?} value
- * @return {Object[]} - A sentence token.
+ * @return {Object} - A sentence token.
  *
- * @api private
+ * @private
  * @memberof ParseLatin#
  */
 parseLatinPrototype.tokenizeSentence = function (value) {
@@ -1634,9 +1645,9 @@ parseLatinPrototype.tokenizeSentenceModifiers = [
  * Tokenize natural Latin-script language into a paragraph token.
  *
  * @param {string?} value
- * @return {Object[]} - A paragraph token.
+ * @return {Object} - A paragraph token.
  *
- * @api private
+ * @private
  * @memberof ParseLatin#
  */
 parseLatinPrototype.tokenizeParagraph = tokenizerFactory(ParseLatin, {
@@ -1660,9 +1671,9 @@ parseLatinPrototype.tokenizeParagraph = tokenizerFactory(ParseLatin, {
  * Tokenize natural Latin-script language into a root token.
  *
  * @param {string?} value
- * @return {Object[]} - A root token.
+ * @return {Object} - A root token.
  *
- * @api private
+ * @private
  * @memberof ParseLatin#
  */
 parseLatinPrototype.tokenizeRoot = tokenizerFactory(ParseLatin, {
@@ -1677,9 +1688,9 @@ parseLatinPrototype.tokenizeRoot = tokenizerFactory(ParseLatin, {
  * Tokenize natural Latin-script language into a syntax tree.
  *
  * @param {string?} value
- * @return {Object[]} - The tokenized document.
+ * @return {Object} - The tokenized document.
  *
- * @api public
+ * @public
  * @memberof ParseLatin#
  */
 parseLatinPrototype.parse = function (value) {
@@ -1693,7 +1704,7 @@ module.exports = ParseLatin;
 
 });
 
-require.register("wooorm~textom@0.1.0-rc.4", function (exports, module) {
+require.register("wooorm~textom@0.1.1", function (exports, module) {
 'use strict';
 
 /**
@@ -2767,11 +2778,11 @@ module.exports = TextOMConstructor;
 
 });
 
-require.register("wooorm~retext@0.1.0-rc.6", function (exports, module) {
+require.register("wooorm~retext@0.1.1", function (exports, module) {
 'use strict';
 
-var TextOMConstructor = require("wooorm~textom@0.1.0-rc.4"),
-    ParseLatin = require("wooorm~parse-latin@0.1.0-rc.11");
+var TextOMConstructor = require("wooorm~textom@0.1.1"),
+    ParseLatin = require("wooorm~parse-latin@0.1.1");
 
 function fromAST(TextOM, ast) {
     var iterator = -1,
@@ -2824,7 +2835,7 @@ function useImmediately(rootNode, use) {
  * `Retext`.
  *
  * @param {Function?} parser - the parser to use. Defaults to parse-latin.
- * @api public
+ * @public
  * @constructor
  */
 function Retext(parser) {
@@ -2855,7 +2866,7 @@ function Retext(parser) {
  *                                    modifying TextOM or a parser, do it
  *                                    in this method.
  * @return this
- * @api public
+ * @public
  */
 Retext.prototype.use = function (plugin) {
     if (typeof plugin !== 'function') {
@@ -2884,7 +2895,7 @@ Retext.prototype.use = function (plugin) {
  *
  * @param {String?} source - The source to convert.
  * @return {Node} - A RootNode containing the tokenised source.
- * @api public
+ * @public
  */
 Retext.prototype.parse = function (source) {
     var self = this,
@@ -2904,7 +2915,7 @@ Retext.prototype.parse = function (source) {
  * on with its parent plugin.
  *
  * @param {Node} tree - The tree to apply plugins to.
- * @api public
+ * @public
  */
 Retext.prototype.applyPlugins = function (tree) {
     var self = this,
@@ -2930,7 +2941,7 @@ exports = module.exports = Retext;
 
 require.register("retext-smartypants-gh-pages", function (exports, module) {
 var smartypants = require("wooorm~retext-smartypants@0.1.0");
-var Retext = require("wooorm~retext@0.1.0-rc.6");
+var Retext = require("wooorm~retext@0.1.1");
 var retext;
 var options = {};
 
