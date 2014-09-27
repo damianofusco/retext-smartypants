@@ -13,7 +13,11 @@ var dashesElement = document.getElementsByName('dashes')[0];
 var backticksElement = document.getElementsByName('backticks')[0];
 
 function makeSmarter(value) {
-    outputElement.value = retext.parse(value).toString();
+    retext.parse(value, function (err, tree) {
+        if (err) throw err;
+
+        outputElement.value = tree;
+    });
 }
 
 function oncheckboxchange(event) {
