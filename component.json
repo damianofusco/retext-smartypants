@@ -3,8 +3,8 @@
   "private" : true,
   "repository": "wooorm/retext-smartypants",
   "dependencies": {
-    "wooorm/retext-smartypants": "^0.2.0",
-    "wooorm/retext": "^0.2.0-rc.2"
+    "wooorm/retext-smartypants": "^0.4.0",
+    "wooorm/retext": "^0.3.0"
   },
   "scripts": [
     "index.js"
