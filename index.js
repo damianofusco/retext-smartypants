@@ -62,7 +62,7 @@ quotesElement.addEventListener('change', function () {
 })
 
 function onanychange() {
-    retext = new Retext().use(smartypants(options));
+    retext = new Retext().use(smartypants, options);
     makeSmarter(inputElement.value);
 }
 
