@@ -1,23 +1,35 @@
-var smartypants = require('retext-smartypants');
-var Retext = require('retext');
+/**
+ * Dependencies.
+ */
+
+var Retext = require('wooorm/retext@0.4.0');
+var smartypants = require('wooorm/retext-smartypants@0.4.1');
+
+/**
+ * Retext.
+ */
+
 var retext;
 var options = {};
 
-var inputElement = document.getElementsByTagName('textarea')[0];
-var formElement = document.getElementsByTagName('form')[0];
-var outputElement = document.getElementsByTagName('textarea')[1];
+/**
+ * DOM elements.
+ */
 
-var quotesElement = document.getElementsByName('quotes')[0];
-var ellipsesElement = document.getElementsByName('ellipses')[0];
-var dashesElement = document.getElementsByName('dashes')[0];
-var backticksElement = document.getElementsByName('backticks')[0];
+var $input = document.getElementsByTagName('textarea')[0];
+var $output = document.getElementsByTagName('textarea')[1];
 
-function makeSmarter(value) {
-    retext.parse(value, function (err, tree) {
-        if (err) throw err;
+var $quotes = document.getElementsByName('quotes')[0];
+var $ellipses = document.getElementsByName('ellipses')[0];
+var $dashes = document.getElementsByName('dashes')[0];
+var $backticks = document.getElementsByName('backticks')[0];
 
-        outputElement.value = tree;
-    });
+/**
+ * Event handlers
+ */
+
+function oninputchange() {
+    smarten();
 }
 
 function oncheckboxchange(event) {
@@ -42,41 +54,66 @@ function onselectchange(event) {
     options[event.target.name] = value;
 }
 
-quotesElement.addEventListener('change', oncheckboxchange);
-ellipsesElement.addEventListener('change', oncheckboxchange);
-dashesElement.addEventListener('change', onselectchange);
-backticksElement.addEventListener('change', onselectchange);
-
-backticksElement.addEventListener('change', function () {
+function onbacktickschange() {
     if (options.backticks === 'all' && options.quotes) {
-        quotesElement.checked = false;
+        $quotes.checked = false;
+
         options.quotes = false
     }
-})
-
-quotesElement.addEventListener('change', function () {
-    if (options.backticks === 'all' && options.quotes) {
-        backticksElement.selectedIndex = 1;
-        options.backticks = true;
-    }
-})
-
-function onanychange() {
-    retext = new Retext().use(smartypants, options);
-    makeSmarter(inputElement.value);
 }
 
-quotesElement.addEventListener('change', onanychange);
-ellipsesElement.addEventListener('change', onanychange);
-dashesElement.addEventListener('change', onanychange);
-backticksElement.addEventListener('change', onanychange);
+function onquoteschange() {
+    if (options.backticks === 'all' && options.quotes) {
+        $backticks.selectedIndex = 1;
 
-inputElement.addEventListener('input', function (event) {
-    makeSmarter(inputElement.value);
-});
+        options.backticks = true;
+    }
+}
 
-oncheckboxchange({'target' : quotesElement});
-oncheckboxchange({'target' : ellipsesElement});
-onselectchange({'target' : dashesElement});
-onselectchange({'target' : backticksElement});
-onanychange();
+function onanyoptionchange() {
+    retext = new Retext().use(smartypants, options);
+
+    smarten();
+}
+
+/**
+ * Smarten input.
+ */
+
+function smarten(value) {
+    retext.parse($input.value, function (err, tree) {
+        if (err) throw err;
+
+        $output.value = tree;
+    });
+}
+
+/**
+ * Attach event handlers.
+ */
+
+$quotes.addEventListener('change', oncheckboxchange);
+$ellipses.addEventListener('change', oncheckboxchange);
+$dashes.addEventListener('change', onselectchange);
+$backticks.addEventListener('change', onselectchange);
+
+$quotes.addEventListener('change', onquoteschange);
+$backticks.addEventListener('change', onbacktickschange);
+
+$quotes.addEventListener('change', onanyoptionchange);
+$ellipses.addEventListener('change', onanyoptionchange);
+$dashes.addEventListener('change', onanyoptionchange);
+$backticks.addEventListener('change', onanyoptionchange);
+
+$input.addEventListener('input', smarten);
+
+/**
+ * Provide initial answer.
+ */
+
+oncheckboxchange({'target' : $quotes});
+oncheckboxchange({'target' : $ellipses});
+onselectchange({'target' : $dashes});
+onselectchange({'target' : $backticks});
+
+onanyoptionchange();
