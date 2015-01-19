@@ -2,8 +2,8 @@
  * Dependencies.
  */
 
-var Retext = require('wooorm/retext@0.5.0-rc.1');
-var smartypants = require('wooorm/retext-smartypants@0.4.2');
+var Retext = require('wooorm/retext@0.5.0');
+var smartypants = require('wooorm/retext-smartypants@0.4.3');
 
 /**
  * Retext.
